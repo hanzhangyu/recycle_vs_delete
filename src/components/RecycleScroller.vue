@@ -88,6 +88,9 @@ export default {
     this.$nextTick(() => {
       this.updateVisibleItems(true);
       this.ready = true; // mounted 之后
+      this.$nextTick(() => {
+        this.$emit("ready");
+      });
     });
   },
   methods: {

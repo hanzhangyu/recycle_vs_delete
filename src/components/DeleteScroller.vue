@@ -84,6 +84,9 @@ export default {
     console.log(1);
     this.$nextTick(() => {
       this.updateVisibleItems();
+      this.$nextTick(() => {
+        this.$emit("ready");
+      });
     });
   },
   methods: {
@@ -176,6 +179,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

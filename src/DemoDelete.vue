@@ -1,7 +1,12 @@
 <template>
   <main>
     <h1>delete</h1>
-    <DeleteScroller :list="list" class="scroll-container">
+    <DeleteScroller
+      :list="list"
+      class="scroll-container"
+      ref="scroller"
+      @ready="handleStart"
+    >
       <template v-slot="{ item, index }">
         <DeleteScrollerItem :item="item">
           <span>{{ item.title }}</span>
@@ -18,7 +23,23 @@ import DeleteScroller from "./components/DeleteScroller.vue";
 import DeleteScrollerItem from "./components/DeleteScrollerItem.vue";
 export default {
   components: { DeleteScroller, DeleteScrollerItem },
-  props: ["list"],
+  inject: ["preformance"],
+  props: ["list", "next"],
+  mounted() {},
+  methods: {
+    async handleStart() {
+      const { ele, wrapper } = this.getEle();
+      await this.preformance.install(ele, wrapper);
+      this.next();
+    },
+    getEle() {
+      const ele = this.$refs.scroller.$el;
+      return {
+        ele,
+        wrapper: ele.querySelector(".delete-scroller__wrapper"),
+      };
+    },
+  },
 };
 </script>
 
