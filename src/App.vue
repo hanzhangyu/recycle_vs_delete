@@ -6,7 +6,9 @@
         target="_blank"
         >查看结果截图</a
       >
-      <a href="https://github.com/hanzhangyu/recycle_vs_delete">github</a>
+      <a href="https://github.com/hanzhangyu/recycle_vs_delete" target="_blank"
+        >github</a
+      >
     </div>
     <div class="wrap">
       <button :disabled="lock" @click="mode = 'delete'">delete</button>
