@@ -30,17 +30,26 @@ export default {
       performance: new Performance(),
       imgs: { buy, cry },
       list: this.list,
+      appStatus: this.appStatus,
     };
   },
   data() {
     return {
+      appStatus: {
+        fetched: false,
+      },
       lock: true,
       mode: "starter",
       list: [],
     };
   },
   async mounted() {
-    this.list.push(...(await import("/assets/data.json")));
+    this.list.push(
+      ...(await fetch(
+        "https://hanzhangyu.github.io/data/recycle_vs_delete.json",
+      ).then(res => res.json())),
+    );
+    this.appStatus.fetched = true;
   },
   methods: {
     handleNext() {
@@ -74,5 +83,8 @@ button:disabled {
 <style>
 canvas {
   display: inline-block !important;
+}
+button {
+  cursor: pointer;
 }
 </style>

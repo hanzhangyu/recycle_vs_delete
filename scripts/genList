@@ -22,6 +22,6 @@ function genList(count) {
 }
 
 fs.writeFileSync(
-  path.resolve(__dirname, "../src/assets/data.json"),
+  path.resolve(__dirname, "../dist/recycle_vs_delete.json"),
   JSON.stringify(genList(10000)),
 );
