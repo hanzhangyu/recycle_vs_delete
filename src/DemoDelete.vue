@@ -23,21 +23,17 @@ import DeleteScroller from "./components/DeleteScroller.vue";
 import DeleteScrollerItem from "./components/DeleteScrollerItem.vue";
 export default {
   components: { DeleteScroller, DeleteScrollerItem },
-  inject: ["preformance"],
+  inject: ["performance"],
   props: ["list", "next"],
   mounted() {},
   methods: {
     async handleStart() {
-      const { ele, wrapper } = this.getEle();
-      await this.preformance.install(ele, wrapper);
-      this.next();
-    },
-    getEle() {
+      if(this.tested) return;
+      this.tested = true;
       const ele = this.$refs.scroller.$el;
-      return {
-        ele,
-        wrapper: ele.querySelector(".delete-scroller__wrapper"),
-      };
+      const wrapper = ele.querySelector(".delete-scroller__wrapper");
+      await this.performance.install("delete", ele, wrapper);
+      this.next();
     },
   },
 };

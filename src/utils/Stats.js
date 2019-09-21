@@ -50,6 +50,19 @@ var Stats = function() {
   return {
     REVISION: 16,
 
+    recording: false,
+    stageResult: [],
+
+    record() {
+      this.recording = true;
+    },
+    endRecord() {
+      const ret = this.stageResult;
+      this.recording = false;
+      this.stageResult = [];
+      return ret;
+    },
+
     dom: container,
 
     addPanel: addPanel,
@@ -62,24 +75,28 @@ var Stats = function() {
     end: function() {
       frames++;
 
+      const ret = {};
+
       var time = (performance || Date).now();
 
       msPanel.update(time - beginTime, 200);
 
       if (time > prevTime + 1000) {
-        fpsPanel.update((frames * 1000) / (time - prevTime), 100);
+        const fps = (frames * 1000) / (time - prevTime);
+        ret.fps = fps;
+        fpsPanel.update(fps, 100);
 
         prevTime = time;
         frames = 0;
 
         if (memPanel) {
           var memory = performance.memory;
-          memPanel.update(
-            memory.usedJSHeapSize / 1048576,
-            memory.jsHeapSizeLimit / 1048576,
-          );
+          const mem = memory.usedJSHeapSize / 1048576;
+          ret.mem = mem;
+          memPanel.update(mem, memory.jsHeapSizeLimit / 1048576);
         }
       }
+      this.recording && (ret.fps  || ret.mem) && this.stageResult.push(ret);
 
       return time;
     },

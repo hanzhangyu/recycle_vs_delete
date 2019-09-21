@@ -10,7 +10,7 @@
 
 <script>
 import genList from "./utils/genList";
-import Preformance from "./utils/Preformance";
+import Performance from "./utils/Performance";
 import Delete from "./DemoDelete.vue";
 import Recycle from "./DemoRecycle.vue";
 import Starter from "./Starter.vue";
@@ -25,7 +25,7 @@ export default {
   },
   provide() {
     return {
-      preformance: new Preformance(),
+      performance: new Performance(),
     };
   },
   data() {
@@ -65,5 +65,10 @@ export default {
 }
 button:disabled {
   cursor: not-allowed;
+}
+</style>
+<style>
+canvas {
+  display: inline-block !important;
 }
 </style>

@@ -3,28 +3,30 @@
  */
 import Stats from "./Stats";
 
-window.stats = new Stats();
-document.body.appendChild(stats.dom);
-requestAnimationFrame(function loop() {
-  stats.update();
-  requestAnimationFrame(loop);
-});
-
 const delay = (timeout = 20) => new Promise(r => setTimeout(r, timeout));
 
 export default class {
   constructor() {
     this.result = [];
+    this.stats = new Stats();
+    document.body.appendChild(this.stats.dom);
+    requestAnimationFrame(this.loop);
   }
+  loop = () => {
+    this.stats.update();
+    requestAnimationFrame(this.loop);
+  };
   install = async (title, ele, wrapper) => {
     this.ele = ele;
     this.wrapper = wrapper;
+    this.stats.record();
     await this.test();
+    const perfs = this.stats.endRecord();
+
     this.result.push({
       title,
-      fps: 1,
-      memory: 1,
-    })
+      perfs,
+    });
   };
   async test() {
     const speeds = [

@@ -1,7 +1,12 @@
 <template>
   <main>
     <h1>recycle</h1>
-    <RecycleScroller :list="list" class="scroll-container">
+    <RecycleScroller
+      :list="list"
+      class="scroll-container"
+      ref="scroller"
+      @ready="handleStart"
+    >
       <template v-slot="{ item, active, index }">
         <RecycleScrollerItem :active="active" :item="item">
           <span>{{ item.title }}</span>
@@ -18,7 +23,18 @@ import RecycleScroller from "./components/RecycleScroller.vue";
 import RecycleScrollerItem from "./components/RecycleScrollerItem.vue";
 export default {
   components: { RecycleScroller, RecycleScrollerItem },
-  props: ["list"],
+  inject: ["performance"],
+  props: ["list", "next"],
+  methods: {
+    async handleStart() {
+      if(this.tested) return;
+      this.tested = true;
+      const ele = this.$refs.scroller.$el;
+      const wrapper = ele.querySelector(".recycle-scroller__wrapper");
+      await this.performance.install("recycle", ele, wrapper);
+      this.next();
+    },
+  },
 };
 </script>
 
