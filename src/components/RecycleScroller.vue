@@ -13,9 +13,9 @@
         :key="view.nr.id"
         :style="ready ? { transform: `translateY(${view.position}px)` } : null"
         class="recycle-scroller__item"
-        :class="{ hover: hoverKey === view.item.id }"
-        @mouseenter="hoverKey = view.item.id"
-        @mouseleave="hoverKey = null"
+        :class="{ hover: hoverId === view.item.id }"
+        @mouseenter="hoverId = view.item.id"
+        @mouseleave="hoverId = null"
       >
         <slot :item="view.item" :index="view.index" :active="view.used" />
       </div>
@@ -38,7 +38,6 @@ export default {
       ready: false, // 计算完一次高度之后再显示，不然会闪
       hoverId: null, // 当前 hover 项
       heights: {}, // Map<number, number> id 与 高度映射
-      hoverKey: null,
     };
   },
   provide() {
@@ -63,7 +62,7 @@ export default {
     },
     heights() {
       console.log("changed");
-      console.log({ ...this.heights });
+      // console.log({ ...this.heights });
       this.updateVisibleItems(false);
     },
   },
@@ -108,7 +107,7 @@ export default {
       const len = list.length;
       if (len === 0) return;
 
-      // region 计算新的其实位置
+      // region 计算新的起始位置
       const { scrollTop, clientHeight } = this.$el;
       const lastItem = itemsWithHeight[len - 1];
       const startPx = scrollTop - this.offset;

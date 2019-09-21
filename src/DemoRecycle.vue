@@ -1,13 +1,16 @@
 <template>
-  <RecycleScroller :list="list" class="scroll-container">
-    <template v-slot="{ item, active, index }">
-      <RecycleScrollerItem :active="active" :item="item">
-        <span>{{ item.title }}</span>
-        <img :src="item.src" alt="商品图片" />
-        <p>{{ item.content }}</p>
-      </RecycleScrollerItem>
-    </template>
-  </RecycleScroller>
+  <main>
+    <h1>recycle</h1>
+    <RecycleScroller :list="list" class="scroll-container">
+      <template v-slot="{ item, active, index }">
+        <RecycleScrollerItem :active="active" :item="item">
+          <span>{{ item.title }}</span>
+          <img :src="item.src" alt="商品图片" />
+          <p>{{ item.content }}</p>
+        </RecycleScrollerItem>
+      </template>
+    </RecycleScroller>
+  </main>
 </template>
 
 <script>
@@ -22,7 +25,7 @@ export default {
 <style lang="scss" scoped>
 .scroll-container {
   width: 500px;
-  height: 500px;
+  height: 700px;
   word-break: break-all;
   overflow: auto;
 }
