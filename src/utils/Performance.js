@@ -32,14 +32,10 @@ export default class {
     const speeds = [
       undefined,
       -200,
-      600,
-      -800,
       1000,
-      -1500,
-      1500,
-      -1500,
-      3000,
       -3000,
+      6000,
+      -12000,
     ];
     for (let speed of speeds) {
       await this.scroll(speed);

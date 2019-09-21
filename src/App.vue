@@ -1,5 +1,13 @@
 <template>
   <div>
+    <div class="links">
+      <a
+        href="https://raw.githubusercontent.com/hanzhangyu/recycle_vs_delete/master/src/assets/img/result.png"
+        target="_blank"
+        >查看结果截图</a
+      >
+      <a href="https://github.com/hanzhangyu/recycle_vs_delete">github</a>
+    </div>
     <div class="wrap">
       <button :disabled="lock" @click="mode = 'delete'">delete</button>
       <button :disabled="lock" @click="mode = 'recycle'">recycle</button>
@@ -78,6 +86,9 @@ export default {
 }
 button:disabled {
   cursor: not-allowed;
+}
+.links {
+  float: right;
 }
 </style>
 <style>
