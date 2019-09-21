@@ -10,7 +10,7 @@
       <template v-slot="{ item, active, index }">
         <RecycleScrollerItem :active="active" :item="item">
           <span>{{ item.title }}</span>
-          <img :src="item.src" alt="商品图片" />
+          <img :src="item.id % 2 === 0 ? imgs.buy : imgs.cry" alt="商品图片" />
           <p>{{ item.content }}</p>
         </RecycleScrollerItem>
       </template>
@@ -21,14 +21,17 @@
 <script>
 import RecycleScroller from "./components/RecycleScroller.vue";
 import RecycleScrollerItem from "./components/RecycleScrollerItem.vue";
+import buy from "/assets/img/buy.png";
+import cry from "/assets/img/cry.png";
+let tested = false;
 export default {
   components: { RecycleScroller, RecycleScrollerItem },
-  inject: ["performance"],
-  props: ["list", "next"],
+  inject: ["performance", "imgs", "list"],
+  props: ["next"],
   methods: {
     async handleStart() {
-      if(this.tested) return;
-      this.tested = true;
+      if(tested) return;
+      tested = true;
       const ele = this.$refs.scroller.$el;
       const wrapper = ele.querySelector(".recycle-scroller__wrapper");
       await this.performance.install("recycle", ele, wrapper);

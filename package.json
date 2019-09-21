@@ -5,8 +5,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "parcel ./src/index.html",
-    "build": "npm run clean && parcel build ./src/index.html --public-url ./",
-    "clean": "rm -rf ./dist/*"
+    "build": "npm run build:data && npm run clean && parcel build ./src/index.html --public-url ./",
+    "clean": "rm -rf ./dist/*",
+    "build:data": "./scripts/genList"
   },
   "browserslist": [
     "last 3 Chrome versions"

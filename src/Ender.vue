@@ -1,6 +1,7 @@
 <template>
   <main>
     <h1>得到结果</h1>
+    <p>（根据我的测试：10^3 数据差别不大，10^4 之后开始明显）</p>
     <div v-for="perf in result">
       <h2>{{ perf.title }}</h2>
       <p>average fps: {{ perf.fps }}</p>

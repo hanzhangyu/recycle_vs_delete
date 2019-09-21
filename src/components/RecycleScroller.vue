@@ -61,7 +61,7 @@ export default {
       this.updateVisibleItems(true);
     },
     heights() {
-      console.log("changed");
+      // console.log("changed");
       // console.log({ ...this.heights });
       this.updateVisibleItems(false);
     },
@@ -69,7 +69,7 @@ export default {
   computed: {
     // computed 不是 deep 的 const computedWatcherOptions = { lazy: true }
     itemsWithHeight() {
-      console.log("this.heights");
+      // console.log("this.heights");
       let accumulator = 0;
       return this.list.map(item => {
         const height = this.heights[item.id] || this.minHeight; // 未出现的标记为 minHeight

@@ -4,17 +4,19 @@
       <button :disabled="lock" @click="mode = 'delete'">delete</button>
       <button :disabled="lock" @click="mode = 'recycle'">recycle</button>
     </div>
-    <component :is="mode" :list="list" :next="handleNext"></component>
+    <component :is="mode" :next="handleNext"></component>
   </div>
 </template>
 
 <script>
-import genList from "./utils/genList";
 import Performance from "./utils/Performance";
 import Delete from "./DemoDelete.vue";
 import Recycle from "./DemoRecycle.vue";
 import Starter from "./Starter.vue";
 import Ender from "./Ender.vue";
+import buy from "/assets/img/buy.png";
+import cry from "/assets/img/cry.png";
+
 export default {
   name: "app",
   components: {
@@ -26,6 +28,8 @@ export default {
   provide() {
     return {
       performance: new Performance(),
+      imgs: { buy, cry },
+      list: this.list,
     };
   },
   data() {
@@ -35,8 +39,8 @@ export default {
       list: [],
     };
   },
-  mounted() {
-    this.list = genList(1000);
+  async mounted() {
+    this.list.push(...(await import("/assets/data.json")));
   },
   methods: {
     handleNext() {
