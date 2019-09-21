@@ -1,5 +1,5 @@
 import Vue from "vue";
-import Stats from "stats.js";
+import Stats from "./utils/stats";
 import App from "./App.vue";
 
 Vue.config.productionTip = false;

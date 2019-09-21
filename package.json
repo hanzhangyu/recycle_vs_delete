@@ -19,7 +19,6 @@
     "vue-template-compiler": "^2.6.10"
   },
   "dependencies": {
-    "stats.js": "^0.17.0",
     "vue": "^2.6.10",
     "vue-hot-reload-api": "^2.3.4"
   }
